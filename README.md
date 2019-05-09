@@ -1,2 +1,2 @@
 # redis
-redis测定
+redis
