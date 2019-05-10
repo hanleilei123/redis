@@ -8,6 +8,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.Array;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -47,5 +49,19 @@ public class TestController {
 
 
         return "hello word";
+    }
+
+    public String testHashMap(){
+        HashMap<Object, Object> hashMap = new HashMap<>();
+
+        hashMap.put("1111","111");
+
+        hashMap.toString();
+
+
+
+
+        return "";
+
     }
 }
