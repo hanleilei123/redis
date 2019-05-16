@@ -5,9 +5,10 @@ import org.junit.Test;
 /**
  * Created by Administrator on 2019/5/14.
  */
-public class SelectionSort  extends  sort{
+public class SelectionSort  extends Sort {
     /*
     * 选择排序
+    * 排序的时间复杂度为O(N2)
     * */
     @Test
     public void  selectionSortMin(){
@@ -17,11 +18,11 @@ public class SelectionSort  extends  sort{
         for(int i=0;i<length-1;i++){
             minPoint=i;
             for(int j=i+1;j<=length-1;j++){
-                if(array[j]<array[minPoint]){
+                if(array[j]<array[minPoint]){   //如果待排数组中的某个元素比当前元素小，minPoint指向该元素的下标
                     minPoint=j;
                 }
             }
-            if(minPoint!=i){
+            if(minPoint!=i){  //如果发现了更小的元素，交换位置
                 temp=array[i];
                 array[i]=array[minPoint];
                 array[minPoint]=temp;

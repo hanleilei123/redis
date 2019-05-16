@@ -5,7 +5,7 @@ import org.junit.Test;
 /**
  * Created by Administrator on 2019/5/14.
  */
-public class BubbleSort extends sort {
+public class BubbleSort extends Sort {
     @Test
     /*冒泡排序*/
     public  void bubbleSort1(){
