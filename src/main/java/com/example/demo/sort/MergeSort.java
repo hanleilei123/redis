@@ -1,11 +1,16 @@
 package com.example.demo.sort;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by Administrator on 2019/5/15.
  */
 public class MergeSort  extends Sort {
+
+    public Logger logger = LoggerFactory.getLogger(MergeSort.class);
+
     //归并排序
     @Test
     public void mergeSort(){
@@ -72,4 +77,67 @@ public class MergeSort  extends Sort {
         }
 
     }
+    @Test
+    public  void Test(){
+        int[] arrayA = {7, 14, 39, 55, 62, 74};
+        int[] arrayB = {23, 47, 81, 96};
+        int[] arrayC=new int[10];
+        merge(arrayA,arrayA.length,arrayB,arrayB.length,arrayC);
+
+    }
+
+    /**
+     * 归并arrayA与arrayB到arrayC中
+     * @param arrayA  待归并的数组A
+     * @param sizeA 数组A的长度
+     * @param arrayB  待归并的数组B
+     * @param sizeB 数组B的长度
+     * @param arrayC  辅助归并排序的数组
+     */
+    public   void merge(int [] arrayA,int sizeA,
+                             int [] arrayB,int sizeB,
+                             int [] arrayC){
+
+        int i=0,j=0,k=0;  //分别当作arrayA、arrayB、arrayC的下标指针
+
+        while(i<sizeA&& j<sizeB){  //两个数组都不为空
+            if(arrayA[i]<arrayB[j]){//将两者较小的那个放到arrayC中
+                arrayC[k++]= arrayA[i++];
+            }else{
+                arrayC[k++]= arrayB[j++];
+            }
+            System.out.println(arrayC[k-1]);
+        }  //该循环结束后，一个数组已经完全复制到arrayC中了，另一个数组中还有元素
+
+        //后面的两个while循环用于处理另一个不为空的数组
+        while(i<sizeA){
+            arrayC[k++]= arrayA[i++];
+        }
+
+        while(j<sizeB){
+            arrayC[k++]= arrayB[j++];
+        }
+
+        display(arrayC);
+    }
+
+
+    @Test
+   public void multiply(){
+        logger.info(""+multiply1(10));
+    }
+
+    /**
+     * 计算阶乘
+     * @param i
+     * @return
+     */
+    public int multiply1(int i){
+       if(i==1){
+           return 1;
+       }else{
+         return   i*multiply1(i-1);
+       }
+    }
+
 }
