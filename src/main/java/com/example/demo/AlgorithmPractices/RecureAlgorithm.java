@@ -1,8 +1,10 @@
 package com.example.demo.AlgorithmPractices;
 
 import org.junit.Test;
+import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 
 /**
@@ -24,6 +26,10 @@ public class RecureAlgorithm {
        // lists.add(1);
         //集合工具类
         System.out.println( CollectionUtils.isEmpty(lists));
+        int MAXIMUM_CAPACITY = 1 << 30;
+        System.out.println(MAXIMUM_CAPACITY);
+        System.out.println(MAXIMUM_CAPACITY>>>1);
+        System.out.println(1 << 29);
     }
 
     private int  recureAdd(int i) {

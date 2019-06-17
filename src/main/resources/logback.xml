@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reference Manual http://logback.qos.ch/manual/index.html -->
+<configuration debug="false" scan="false" scanPeriod="30 seconds">
+
+    <property name="contextName" value="demo"></property>
+    <contextName>${contextName}</contextName>
+
+    <property name="LOG_PATH" value="/applogs/tomcat/logs"></property>
+    <property name="outFormat" value=" [%d] [%p] [serviceName=%t,processLocation=%c{1}:%L] - %m%n"></property>
+    <!--<property name="outFormat" value="%d [%t] [%p] %c{1}:%L - %m%n"></property>-->
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8"> <!-- encoder 可以指定字符集，对于中文输出有意义 -->
+            <pattern>${outFormat}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <!--<file>${LOG_PATH}/${contextName}_%d{yyyy-MM-dd}.log</filTe>-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> <!-- rollover daily -->
+            <fileNamePattern>${LOG_PATH}/${contextName}_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>50</maxHistory>
+        </rollingPolicy>
+
+        <append>true</append>
+        <encoder charset="UTF-8">
+            <pattern>${outFormat}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- debug 生产环境 注释掉 -->
+    <!--<logger name="com.i2f" level="debug"/>-->
+    <root level="debug">
+        <!-- 控制台打印输出 生产环境 注释掉 -->
+         <appender-ref ref="stdout"/>
+        <appender-ref ref="ROLLING"/>
+    </root>
+    <logger name="java.sql.Statement" level="DEBUG"/>
+    <logger name="java.sql.PreparedStatement" level="DEBUG"/>
+    <logger name="java.sql.Connection" level="DEBUG"/>
+    <logger name="java.sql.ResultSet" level="DEBUG"/>
+</configuration>

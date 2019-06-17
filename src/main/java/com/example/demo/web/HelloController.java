@@ -8,16 +8,18 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * Created by Administrator on 2019/3/28.
  */
 @RestController
 public class HelloController {
-
+    private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
 
      @RequestMapping(value = "/hello")
     public String index(){
+         logger.debug("hello");
         System.out.println("hello");
         Semaphore semaphore = new Semaphore(2);
 
