@@ -2,7 +2,7 @@ package com.example.demo.AlgorithmPractices;
 
 import org.junit.Test;
 
-/**
+/**小球下落递归算法
  * Created by Administrator on 2019/6/10.
  */
 public class Ball {

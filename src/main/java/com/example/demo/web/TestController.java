@@ -1,15 +1,21 @@
 package com.example.demo.web;
 
 
+import com.sun.prism.impl.ps.CachingShapeRep;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.*;
 import java.lang.reflect.Array;
-import java.util.HashMap;
+import java.math.BigDecimal;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -24,44 +30,84 @@ public class TestController {
     private StringRedisTemplate stringRedisTemplate;
 
 
-    @RequestMapping("/redisTest")
-    public String index(){
+    /*@RequestMapping("/redisTest")
+    public String index() {
+        UUID uuid = UUID.randomUUID();
+          *//*  stringRedisTemplate.expire("key",10,TimeUnit.SECONDS);
+            Boolean result = stringRedisTemplate.opsForValue().setIfAbsent("key", "value");*//*
+        stringRedisTemplate.opsForValue().set("lockey", uuid.toString(), 10, TimeUnit.SECONDS);
+        //通过get方法获取存储的内容(key)
         try {
-           // stringRedisTemplate.expire("key",10,TimeUnit.SECONDS);
-            Boolean result = stringRedisTemplate.opsForValue().setIfAbsent("key", "value");
-            //通过get方法获取存储的内容(key)
-            if(result) {
-                String value = stringRedisTemplate.opsForValue().get("stock");
-                int i = Integer.parseInt(value);
+            String value = stringRedisTemplate.opsForValue().get("stock");
+            int i = Integer.parseInt(value);
 
-                if(i==0){
-                    System.out.println("已售完");
-                }else{
-                    System.out.println("当前库存"+i);
-                    stringRedisTemplate.opsForValue().set("stock", --i + "");
-                }
-
+            if (i == 0) {
+                System.out.println("已售完");
+            } else {
+                System.out.println("当前库存" + i);
+                stringRedisTemplate.opsForValue().set("stock", --i + "");
             }
-        }finally {
-            stringRedisTemplate.delete("key");
-        }
 
+        } finally {
+            if (uuid.toString().equals(stringRedisTemplate.opsForValue().get("lockey"))) {
+                stringRedisTemplate.delete("lockey");
+            }
+        }
 
 
         return "hello word";
     }
-
-    public String testHashMap(){
+*/
+    @Test
+    public void testHashMap() throws Exception {
         HashMap<Object, Object> hashMap = new HashMap<>();
-
-        hashMap.put("1111","111");
-
+        hashMap.put("1111", "111");
+        hashMap.get("1111");
         hashMap.toString();
+        Map m = Collections.synchronizedMap(hashMap);
+
+
+        ConcurrentHashMap<Object, Object> concurrentHashMap = new ConcurrentHashMap<>();
+        concurrentHashMap.get("1111");
+        File file = new File("");
+        BufferedReader in1 = new BufferedReader(new InputStreamReader(new FileInputStream(file)));//字符流
+        DataInputStream in2 = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));//字节流
+
+        LinkedList<Object> objects = new LinkedList<>();
 
 
 
+        return;
+    }
+}
 
-        return "";
+
+class a {
+    public static void main(String[] args) throws IOException {
+        //Runtime.getRuntime().exec("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
+        // System.out.println(16*0.75);
+
+       /* float a=1.0f-0.9f;
+         a=1.0f-0.3f;
+        float b=0.9f-0.7f;
+        float c=0.8f-0.6f;
+        float d=1.7f-1.0f;
+        System.out.println("a"+a);
+        System.out.println("b"+b);
+        System.out.println("c"+c);
+        System.out.println("d"+d);*/
+        Float v = 1.0f;
+/*
+        String param = null;
+        switch (param) {
+            case "null":
+                break;
+            default:
+                System.out.println("default");
+        }*/
+        BigDecimal a = new BigDecimal("0.1");
+        System.out.println(a);
+
 
     }
 }
