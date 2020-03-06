@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServlet;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
@@ -109,5 +110,54 @@ class a {
         System.out.println(a);
 
 
+        HashMap<Object, Object> hashMap = new HashMap<>();
+
+        HashSet<Object> hashSet = new HashSet<>();
+
+        Hashtable<Object, Object> hashtable = new Hashtable<>();
+
+
+
+    }
+
+}
+class aaa{
+    public static void main(String[] args) {
+        String s= new String("shello");
+
+        StringBuilder stringBuilder = new StringBuilder("stringBuilderHello");
+        StringBuffer stringBuffer = new StringBuffer("stringBuilderHello");
+        modify(s);
+        modify(stringBuilder);
+        System.out.println(s);
+        System.out.println(stringBuilder);
+
+
+        HashMap<Object, Object> hashMap = new HashMap<>();
+
+        Map<Object, Object> objectObjectMap = Collections.synchronizedMap(hashMap);
+
+        objectObjectMap.put(null,null);
+
+
+
+
+
+     /*   StringBuffer stringBuffer = new StringBuffer(); //16
+        StringBuilder stringBuilder = new StringBuilder(); //16
+        Hashtable<Object, Object> objectObjectHashtable = new Hashtable<>(); //11
+        HashMap<Object, Object> objectObjectHashMap = new HashMap<>(); //16
+        HashSet<Object> objects1 = new HashSet<>(); //底层实现为hashMap
+        ArrayList<Object> objects = new ArrayList<>(); //10*/
+    }
+
+    private static void modify(String s) {
+        s+="wwwww";
+
+    }
+    private static void modify(StringBuilder s) {
+        s.append("Stringbuilder");
     }
 }
+
+
